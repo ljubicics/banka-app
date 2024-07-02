@@ -37,7 +37,8 @@ import utils.koinViewModel
 @Composable
 fun HomeScreen(
     homeViewModel: HomeViewModel = koinViewModel(),
-    onNewPaymentClick: (String) -> Unit
+    onNewPaymentClick: (String) -> Unit,
+    onCurrencyExchangeClick: () -> Unit
 ) {
 
     val state by homeViewModel.state.collectAsStateMultiplatform()
@@ -63,7 +64,8 @@ fun HomeScreen(
         account = state.rsdAccount,
         transactions = state.transactions,
         isLoading = state.isLoading,
-        onNewPaymentClick = onNewPaymentClick
+        onNewPaymentClick = onNewPaymentClick,
+        onCurrencyExchangeClick = onCurrencyExchangeClick
     )
 }
 
@@ -75,7 +77,8 @@ private fun HomeScreenContent(
     account: Account? = null,
     transactions: List<Transaction> = emptyList(),
     isLoading: Boolean = false,
-    onNewPaymentClick: (String) -> Unit
+    onNewPaymentClick: (String) -> Unit,
+    onCurrencyExchangeClick: () -> Unit
 ) {
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -127,15 +130,18 @@ private fun HomeScreenContent(
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         AccountView(account = account ?: Account())
-                        FunctionalitiesView(onNewPaymentClick = {
-                            onNewPaymentClick(
-                                Json.encodeToString(
-                                    PaymentScreenInfo(
-                                        account = account ?: Account()
+                        FunctionalitiesView(
+                            onNewPaymentClick = {
+                                onNewPaymentClick(
+                                    Json.encodeToString(
+                                        PaymentScreenInfo(
+                                            account = account ?: Account()
+                                        )
                                     )
                                 )
-                            )
-                        })
+                            },
+                            onCurrencyExchangeClick = { onCurrencyExchangeClick() }
+                        )
                         TransactionsView(transactions = transactions, account = account)
                     }
                 }

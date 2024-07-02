@@ -7,9 +7,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
-import domain.model.payment.PaymentScreenInfo
 import kotlinx.serialization.json.Json
 import ui.MainScreen
+import ui.currencyexchange.CurrencyExchangeScreen
 import ui.home.HomeScreen
 import ui.login.LoginScreen
 import ui.payment.NewPaymentScreen
@@ -73,7 +73,10 @@ fun MainNavGraph(
         composable(MainDestinations.HomeScreen.path) {
             HomeScreen(
                 onNewPaymentClick = {
-                    navController.navigate("${MainDestinations.NewPayment.path}/$it")
+                    navController.navigate("${MainDestinations.NewPaymentScreen.path}/$it")
+                },
+                onCurrencyExchangeClick = {
+                    navController.navigate(MainDestinations.CurrencyExchangeScreen.path)
                 }
             )
         }
@@ -83,9 +86,15 @@ fun MainNavGraph(
         composable(MainDestinations.ProfileScreen.path) {
             ProfileScreen()
         }
-        composable("${MainDestinations.NewPayment.path}/{paymentScreenInfo}") { backStackEntry ->
+        composable("${MainDestinations.NewPaymentScreen.path}/{paymentScreenInfo}") { backStackEntry ->
             val paymentScreenInfo = backStackEntry.arguments?.getString("paymentScreenInfo")
-            NewPaymentScreen(navController = navController, paymentScreenInfo = Json.decodeFromString(paymentScreenInfo!!))
+            NewPaymentScreen(
+                navController = navController,
+                paymentScreenInfo = Json.decodeFromString(paymentScreenInfo!!)
+            )
+        }
+        composable(MainDestinations.CurrencyExchangeScreen.path) {
+            CurrencyExchangeScreen(navController = navController)
         }
     }
 }

@@ -2,10 +2,11 @@ package domain.di
 
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module
-import ui.login.LoginViewModel
-import ui.splash.SplashViewModel
 import ui.home.HomeViewModel
+import ui.login.LoginViewModel
 import ui.payment.PaymentViewModel
+import ui.splash.SplashViewModel
+import ui.currencyexchange.CurrencyExchangeViewModel
 
 actual val domainModule = module {
 
@@ -13,4 +14,5 @@ actual val domainModule = module {
     viewModelOf(::SplashViewModel)
     viewModelOf(::HomeViewModel)
     viewModelOf(::PaymentViewModel)
+    viewModelOf(::CurrencyExchangeViewModel)
 }

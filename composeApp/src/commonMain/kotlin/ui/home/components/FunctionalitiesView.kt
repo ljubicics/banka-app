@@ -29,7 +29,8 @@ import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun FunctionalitiesView(
-    onNewPaymentClick: () -> Unit = {}
+    onNewPaymentClick: () -> Unit = {},
+    onCurrencyExchangeClick: () -> Unit = {}
 ) {
     Row(
         modifier = Modifier,
@@ -74,7 +75,10 @@ fun FunctionalitiesView(
                     .width(60.dp)
                     .height(60.dp)
                     .clip(shape = RoundedCornerShape(8.dp))
-                    .background(Color.LightGray),
+                    .background(Color.LightGray)
+                    .clickable {
+                        onCurrencyExchangeClick()
+                    },
                 contentAlignment = Alignment.Center
             ) {
                 Icon(

@@ -14,7 +14,8 @@ sealed class MainDestinations(override val path: String) : IDestination {
     data object HomeScreen : MainDestinations("home")
     data object PaymentScreen : MainDestinations("payment")
     data object ProfileScreen : MainDestinations("profile")
-    data object NewPayment : MainDestinations("new_payment")
+    data object NewPaymentScreen : MainDestinations("new_payment")
+    data object CurrencyExchangeScreen : MainDestinations("currency_exchange")
 }
 
 sealed class NavigationDestinations(override val path: String) : IDestination {
