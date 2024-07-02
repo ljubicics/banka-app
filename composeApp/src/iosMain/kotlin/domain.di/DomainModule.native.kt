@@ -7,6 +7,7 @@ import ui.splash.SplashViewModel
 import ui.home.HomeViewModel
 import ui.payment.PaymentViewModel
 import ui.currencyexchange.CurrencyExchangeViewModel
+import ui.accounts.AccountsViewModel
 
 
 actual val domainModule = module {
@@ -17,4 +18,5 @@ actual val domainModule = module {
     singleOf(::HomeViewModel)
     singleOf(::PaymentViewModel)
     singleOf(::CurrencyExchangeViewModel)
+    singleOf(::AccountsViewModel)
 }

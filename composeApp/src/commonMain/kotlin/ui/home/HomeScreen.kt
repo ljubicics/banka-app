@@ -38,7 +38,8 @@ import utils.koinViewModel
 fun HomeScreen(
     homeViewModel: HomeViewModel = koinViewModel(),
     onNewPaymentClick: (String) -> Unit,
-    onCurrencyExchangeClick: () -> Unit
+    onCurrencyExchangeClick: () -> Unit,
+    onAccountsClick: () -> Unit
 ) {
 
     val state by homeViewModel.state.collectAsStateMultiplatform()
@@ -65,7 +66,8 @@ fun HomeScreen(
         transactions = state.transactions,
         isLoading = state.isLoading,
         onNewPaymentClick = onNewPaymentClick,
-        onCurrencyExchangeClick = onCurrencyExchangeClick
+        onCurrencyExchangeClick = onCurrencyExchangeClick,
+        onAccountsClick = onAccountsClick
     )
 }
 
@@ -78,7 +80,8 @@ private fun HomeScreenContent(
     transactions: List<Transaction> = emptyList(),
     isLoading: Boolean = false,
     onNewPaymentClick: (String) -> Unit,
-    onCurrencyExchangeClick: () -> Unit
+    onCurrencyExchangeClick: () -> Unit,
+    onAccountsClick: () -> Unit
 ) {
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -140,7 +143,8 @@ private fun HomeScreenContent(
                                     )
                                 )
                             },
-                            onCurrencyExchangeClick = { onCurrencyExchangeClick() }
+                            onCurrencyExchangeClick = { onCurrencyExchangeClick() },
+                            onAccountsClick = { onAccountsClick() }
                         )
                         TransactionsView(transactions = transactions, account = account)
                     }

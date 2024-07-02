@@ -10,8 +10,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,6 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import banka3_app.composeapp.generated.resources.Res
+import banka3_app.composeapp.generated.resources.account_icon
 import banka3_app.composeapp.generated.resources.currency_exchange_icon
 import banka3_app.composeapp.generated.resources.euro_icon
 import org.jetbrains.compose.resources.painterResource
@@ -30,7 +29,8 @@ import org.jetbrains.compose.resources.painterResource
 @Composable
 fun FunctionalitiesView(
     onNewPaymentClick: () -> Unit = {},
-    onCurrencyExchangeClick: () -> Unit = {}
+    onCurrencyExchangeClick: () -> Unit = {},
+    onAccountsClick: () -> Unit = {}
 ) {
     Row(
         modifier = Modifier,
@@ -104,15 +104,19 @@ fun FunctionalitiesView(
                     .width(60.dp)
                     .height(60.dp)
                     .clip(shape = RoundedCornerShape(8.dp))
-                    .background(Color.LightGray),
+                    .background(Color.LightGray)
+                    .clickable {
+                        onAccountsClick()
+                    },
+                contentAlignment = Alignment.Center
             ) {
                 Icon(
-                    imageVector = Icons.Default.AddCircle,
+                    painter = painterResource(Res.drawable.account_icon),
                     contentDescription = null
                 )
             }
             Text(
-                text = "Payment",
+                text = "Accounts",
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.Black

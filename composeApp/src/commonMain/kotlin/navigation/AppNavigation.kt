@@ -9,6 +9,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
 import kotlinx.serialization.json.Json
 import ui.MainScreen
+import ui.accounts.AccountsScreen
 import ui.currencyexchange.CurrencyExchangeScreen
 import ui.home.HomeScreen
 import ui.login.LoginScreen
@@ -77,6 +78,9 @@ fun MainNavGraph(
                 },
                 onCurrencyExchangeClick = {
                     navController.navigate(MainDestinations.CurrencyExchangeScreen.path)
+                },
+                onAccountsClick = {
+                    navController.navigate(MainDestinations.AccountsScreen.path)
                 }
             )
         }
@@ -95,6 +99,9 @@ fun MainNavGraph(
         }
         composable(MainDestinations.CurrencyExchangeScreen.path) {
             CurrencyExchangeScreen(navController = navController)
+        }
+        composable(MainDestinations.AccountsScreen.path) {
+            AccountsScreen(navController = navController)
         }
     }
 }
