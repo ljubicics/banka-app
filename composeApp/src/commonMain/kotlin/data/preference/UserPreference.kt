@@ -22,6 +22,7 @@ class UserPreference(
         preferences.edit { preferences ->
             preferences[tokenKey] = token
         }
+
     }
 
     override suspend fun getToken(): String {

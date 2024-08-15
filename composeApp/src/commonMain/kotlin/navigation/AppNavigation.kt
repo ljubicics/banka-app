@@ -17,6 +17,7 @@ import ui.payment.NewPaymentScreen
 import ui.payment.PaymentScreen
 import ui.profile.ProfileScreen
 import ui.splash.SplashScreen
+import ui.stocks.StocksScreen
 
 @Composable
 fun AppNavigation() {
@@ -84,8 +85,8 @@ fun MainNavGraph(
                 }
             )
         }
-        composable(MainDestinations.PaymentScreen.path) {
-            PaymentScreen()
+        composable(MainDestinations.StocksScreen.path) {
+            StocksScreen()
         }
         composable(MainDestinations.ProfileScreen.path) {
             ProfileScreen()

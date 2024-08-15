@@ -8,6 +8,8 @@ import data.repository.currencyexchange.CurrencyExchangeRepository
 import data.repository.login.remote.LoginRepository
 import data.repository.payment.EmailRepository
 import data.repository.payment.PaymentRepository
+import data.repository.stocks.ExchangeRepository
+import data.repository.stocks.StocksMapper
 import data.repository.transaction.TransactionMapper
 import data.repository.transaction.TransactionRepository
 import data.repository.user.UserInfoMapper
@@ -15,6 +17,7 @@ import data.repository.user.remote.UserRepository
 import domain.repository.IAccountRepository
 import domain.repository.ICurrencyExchangeRepository
 import domain.repository.IEmailRepository
+import domain.repository.IExchangeRepository
 import domain.repository.ILoginRepository
 import domain.repository.IPaymentRepository
 import domain.repository.ITransactionRepository
@@ -27,6 +30,7 @@ import domain.usecase.login.LoginUseCase
 import domain.usecase.payment.FinishPaymentUseCase
 import domain.usecase.payment.PaymentUseCase
 import domain.usecase.splash.CheckIfUserAlreadyLoggedInUseCase
+import domain.usecase.stocks.GetStocksUseCase
 import domain.usecase.transaction.GetAccountTransactionsUseCase
 import domain.usecase.user.GetUserInfoUseCase
 import domain.usecase.user.StoreUserInfoUseCase
@@ -38,6 +42,7 @@ private val mapperModule = module {
     single { UserInfoMapper() }
     single { AccountMapper() }
     single { TransactionMapper() }
+    single { StocksMapper() }
 }
 
 private val httpClientModule = module {
@@ -73,6 +78,7 @@ private val httpClientModule = module {
     single<IPaymentRepository> { PaymentRepository(get(named("bank-service"))) }
     single<IEmailRepository> { EmailRepository(get(named("email-service"))) }
     single<ICurrencyExchangeRepository> { CurrencyExchangeRepository(get(named("bank-service"))) }
+    single<IExchangeRepository> { ExchangeRepository(get(named("exchange-service")), get()) }
 }
 
 val sharedModule = module {
@@ -95,4 +101,5 @@ val sharedModule = module {
     single { PaymentUseCase(get()) }
     single { FinishPaymentUseCase(get()) }
     single { ExchangeCurrencyUseCase(get()) }
+    single { GetStocksUseCase(get()) }
 }

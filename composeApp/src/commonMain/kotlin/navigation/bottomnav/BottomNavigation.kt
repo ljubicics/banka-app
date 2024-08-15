@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -17,7 +16,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import banka3_app.composeapp.generated.resources.Res
+import banka3_app.composeapp.generated.resources.stocks_filled_icon
+import banka3_app.composeapp.generated.resources.stocks_outlined_icon
 import navigation.MainDestinations
+import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun BottomNavigationBar(
@@ -33,15 +37,11 @@ fun BottomNavigationBar(
         ),
         BottomNavigationItem(
             title = "Payment",
-            path = MainDestinations.PaymentScreen.path,
+            path = MainDestinations.StocksScreen.path,
+            selectedResIcon = Res.drawable.stocks_filled_icon,
+            unselectedResIcon = Res.drawable.stocks_outlined_icon,
             selectedIcon = Icons.Filled.Add,
             unselectedIcon = Icons.Default.Add,
-        ),
-        BottomNavigationItem(
-            title = "Profile",
-            path = MainDestinations.ProfileScreen.path,
-            selectedIcon = Icons.Filled.Person,
-            unselectedIcon = Icons.Default.Person
         )
     )
 
@@ -60,10 +60,17 @@ fun BottomNavigationBar(
                     navController.navigate(item.path)
                 },
                 icon = {
-                    Icon(
-                        imageVector = if (selectedItemIndex == index) item.selectedIcon else item.unselectedIcon,
-                        contentDescription = null
-                    )
+                    if (item.selectedResIcon != null) {
+                        Icon(
+                            painter = painterResource(item.selectedResIcon),
+                            contentDescription = null,
+                        )
+                    } else {
+                        Icon(
+                            imageVector = if (selectedItemIndex == index) item.selectedIcon else item.unselectedIcon,
+                            contentDescription = null
+                        )
+                    }
                 }
             )
         }
@@ -73,6 +80,8 @@ fun BottomNavigationBar(
 data class BottomNavigationItem(
     val title: String,
     val path: String,
+    val selectedResIcon: DrawableResource? = null,
+    val unselectedResIcon: DrawableResource? = null,
     val selectedIcon: ImageVector,
     val unselectedIcon: ImageVector,
 )
